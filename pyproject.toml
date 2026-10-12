@@ -1,0 +1,67 @@
+[project]
+name = "llm_from_scratch"
+version = "0.0.1"
+description = "build llm from scratch"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "einops>=0.8.1", # tensor operations
+  "einx>=0.3.0", # more general tensor operations
+  "jaxtyping>=0.3.0", # type hints for pytorch/jax/numpy
+  "numpy",
+  "psutil>=6.1.1",
+  "pytest>=8.3.4",
+  "regex>=2024.11.6", # more powerful regex than the builtin `re` module
+  "submitit>=1.5.2", # job submission for SLURM
+  "tiktoken>=0.9.0",
+  "torch~=2.6.0; sys_platform != 'darwin' or platform_machine != 'x86_64'",
+  "torch~=2.2.2; sys_platform == 'darwin' and platform_machine == 'x86_64'", # Intel Macs
+  "tqdm>=4.67.1",
+  "wandb>=0.19.7",
+  "ty>=0.0.1a16",
+  "humanfriendly",
+  "matplotlib",
+  "tensorboard>=2.20.0",
+  "fastwarc>=0.15.2",
+  "resiliparse>=0.15.2",
+  "xopen>=2.0.2",
+  "fasttext-wheel>=0.9.2",
+  "nltk>=3.9.1",
+  "unidecode>=1.4.0",
+  "vllm>=0.2.5",
+  "latex2sympy2-extended>=1.10.2",
+  "math-verify>=0.8.0",
+  "pylatexenc>=2.10",
+  "transformers>=4.56.2",
+  "accelerate>=1.10.1",
+  "torchtyping>=0.1.5",
+  "typeguard>=2.13.3",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.3,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "llm"
+module-root = ""
+
+[tool.uv]
+package = true
+python-preference = "managed"
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "WARNING"
+addopts = "-s"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint.extend-per-file-ignores]
+# Also ignore `E402` in all `__init__.py` files.
+"__init__.py" = ["E402", "F401", "F403", "E501"]
+
+[tool.ruff.lint]
+extend-select = ["UP"]
+ignore = ["F722"]
